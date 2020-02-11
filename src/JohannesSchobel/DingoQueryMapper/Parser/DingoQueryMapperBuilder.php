@@ -92,11 +92,11 @@ class DingoQueryMapperBuilder
      * @param Builder $builder
      * @return $this
      */
-    public function createFromBuilder(Builder $builder)
+    public function createFromBuilder(Builder $builder, $columns = ['*'])
     {
         $this->model = $builder->getModel();
         $this->query = $builder;
-
+        $this->columns = $columns;
         $this->build();
 
         return $this;
@@ -323,7 +323,11 @@ class DingoQueryMapperBuilder
         if (!$this->hasTableColumn($key)) {
             throw new UnknownColumnException("Unknown column '{$key}'");
         }
-
+        if(strpos($value, ',') !== false && $operator == '=')
+        {
+            $array = explode(',', $value);
+            return $this->query->whereIn($key, $array);
+        }
         $this->query->where($key, $operator, $value);
     }
 

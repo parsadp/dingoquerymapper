@@ -51,10 +51,10 @@ class DingoQueryMapper
      * @param Collection $collection
      * @return $this
      */
-    public function createFromCollection(Collection $collection)
+    public function createFromCollection(Collection $collection, $sort = true)
     {
         $this->operator = new CollectionOperator($collection, $this->request);
-        $this->prepare();
+        $this->prepare($sort);
 
         return $this;
     }
@@ -64,13 +64,16 @@ class DingoQueryMapper
      *
      * @return $this
      */
-    private function prepare()
+    private function prepare($sort = true)
     {
         $constantParameters = $this->uriParser->predefinedParameters();
         array_map([$this, 'prepareConstant'], $constantParameters);
 
         $this->filter();
-        $this->sort();
+
+        if ($sort == true) {
+            $this->sort();
+        }
 
         return $this;
     }
