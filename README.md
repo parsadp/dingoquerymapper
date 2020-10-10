@@ -7,7 +7,7 @@ First, add the respective line to your composer file
 ``` json
 "require" : {
    ... ,
-   "johannesschobel/dingoquerymapper": "dev-master" ,
+   "parsadp/dingoquerymapper": "dev-master" ,
 }
 ```
 
@@ -18,14 +18,14 @@ Then add respective `ServiceProvider` from the package to your `config/app.php` 
 ``` php
 'providers' => [
    ... ,
-   JohannesSchobel\DingoQueryMapper\DingoQueryMapperServiceProvider::class,
+   parsadp\DingoQueryMapper\DingoQueryMapperServiceProvider::class,
 ],
 ```
 
 If you want, you can overwrite the basic configuration using the following command:
 
 ```php
-php artisan vendor:publish --provider="JohannesSchobel\DingoQueryMapper\DingoQueryMapperServiceProvider" --tag="config"
+php artisan vendor:publish --provider="parsadp\DingoQueryMapper\DingoQueryMapperServiceProvider" --tag="config"
 ```
 
 This will copy the `dingoquerymapper` configuration file to your `config` folder. Using this file, you can 
